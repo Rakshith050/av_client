@@ -778,7 +778,7 @@ class Root extends Component {
 
 ReactDOM.render(<Root />, document.getElementById("root"));
 serviceWorker.register();
-
+// comment added
 // import React from 'react'
 // import ReactDOM from 'react-dom/client'
 // import { RouterProvider, createBrowserRouter } from 'react-router-dom'
