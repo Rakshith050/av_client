@@ -137,6 +137,9 @@ import ParentTests from "./pages/parent/ParentTests";
 
 import Students from "./pages/school/Students";
 import AddStudent from "./pages/school/AddStudent";
+import ViewStudent from "./pages/school/ViewStudent";
+import Teachers from "./pages/school/Teachers";
+import AddTeacher from "./pages/school/AddTeacher";
 
 class Root extends Component {
   render() {
@@ -769,6 +772,24 @@ class Root extends Component {
             exact
             path={`${process.env.PUBLIC_URL}/school/add_student_view`}
             element={<AddStudent />}
+          />
+
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/school/view_student`}
+            element={<ViewStudent />}
+          />
+
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/school/teachers`}
+            element={<Teachers />}
+          />
+
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/school/add_teacher`}
+            element={<AddTeacher />}
           />
         </Routes>
       </HashRouter>

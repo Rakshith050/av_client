@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { clearSessionStorage, getUserFromSessionStorage } from '../../pages/util/SessionStorage';
-
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  clearSessionStorage,
+  getUserFromSessionStorage,
+} from "../../pages/util/SessionStorage";
 
 function Navheader() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const navClass = `${isOpen ? ' nav-active' : ''}`;
+  const navClass = `${isOpen ? " nav-active" : ""}`;
 
   const navigate = useNavigate();
 
@@ -22,27 +24,37 @@ function Navheader() {
     if (loggedOut) {
       // After the logout state changes, navigate to the appropriate page
       const userData = getUserFromSessionStorage();
-      if (userData && userData.user && userData.user.type === 'admin') {
-        navigate('/admin');
-      } else if(userData && userData.user && userData.user.type === 'teacher'){
-        navigate('/teacher');
-      }else if(userData && userData.user && userData.user.type === 'sub_admin'){
-        navigate('/');
-      }else if(userData && userData.user && userData.user.type === 'parent'){
-        navigate('/');
-      }else{
-        navigate('/');
+      if (userData && userData.user && userData.user.type === "admin") {
+        navigate("/admin");
+      } else if (
+        userData &&
+        userData.user &&
+        userData.user.type === "teacher"
+      ) {
+        navigate("/teacher");
+      } else if (
+        userData &&
+        userData.user &&
+        userData.user.type === "sub_admin"
+      ) {
+        navigate("/");
+      } else if (userData && userData.user && userData.user.type === "parent") {
+        navigate("/");
+      } else {
+        navigate("/");
       }
     }
   }, [loggedOut, navigate]);
 
-
   return (
-    <nav className={`navigation scroll-bar menu-active ${navClass}`} style={{ zIndex: 999 }}>
+    <nav
+      className={`navigation scroll-bar menu-active ${navClass}`}
+      style={{ zIndex: 999 }}
+    >
       <div className="container pl-0 pr-0">
         <div className="nav-content">
           <div className="nav-top">
-            <Link to="/" className='justify-content-center pl-0'>
+            <Link to="/" className="justify-content-center pl-0">
               {/* <i className="feather-slack text-success display1-size mr-3 ml-3"></i>
               <span className="d-inline-block fredoka-font ls-3 fw-600 text-current font-xl logo-text mb-0">
                 Elomoas.
@@ -50,7 +62,8 @@ function Navheader() {
               <img
                 src="/assets/images/abc_logo.png"
                 alt="logo"
-                className="" width={60}
+                className=""
+                width={60}
               />
             </Link>
             <span
@@ -71,7 +84,7 @@ function Navheader() {
                 <span>Home</span>
               </NavLink>
             </li>
-            
+
             <li className="nav-item">
               <NavLink className="navi-link" to="/school/students">
                 <i className="feather-book-open mr-2"></i>
@@ -102,7 +115,6 @@ function Navheader() {
             </li>
             <li>
               <Link
-
                 onClick={logout}
                 className="nav-content-bttn open-font h-auto pt-2 pb-2"
               >
@@ -116,6 +128,5 @@ function Navheader() {
     </nav>
   );
 }
-
 
 export default Navheader;

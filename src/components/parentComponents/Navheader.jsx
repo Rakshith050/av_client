@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { clearSessionStorage, getUserFromSessionStorage } from '../../pages/util/SessionStorage';
-
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  clearSessionStorage,
+  getUserFromSessionStorage,
+} from "../../pages/util/SessionStorage";
 
 function Navheader() {
   const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -10,7 +12,7 @@ function Navheader() {
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const navClass = `${isOpen ? ' nav-active' : ''}`;
+  const navClass = `${isOpen ? " nav-active" : ""}`;
 
   const navigate = useNavigate();
 
@@ -24,16 +26,24 @@ function Navheader() {
     if (loggedOut) {
       // After the logout state changes, navigate to the appropriate page
       const userData = getUserFromSessionStorage();
-      if (userData && userData.user && userData.user.type === 'admin') {
-        navigate('/admin');
-      } else if (userData && userData.user && userData.user.type === 'teacher') {
-        navigate('/teacher');
-      } else if (userData && userData.user && userData.user.type === 'sub_admin') {
-        navigate('/');
-      } else if (userData && userData.user && userData.user.type === 'parent') {
-        navigate('/');
+      if (userData && userData.user && userData.user.type === "admin") {
+        navigate("/admin");
+      } else if (
+        userData &&
+        userData.user &&
+        userData.user.type === "teacher"
+      ) {
+        navigate("/teacher");
+      } else if (
+        userData &&
+        userData.user &&
+        userData.user.type === "sub_admin"
+      ) {
+        navigate("/");
+      } else if (userData && userData.user && userData.user.type === "parent") {
+        navigate("/");
       } else {
-        navigate('/');
+        navigate("/");
       }
     }
   }, [loggedOut, navigate]);
@@ -52,18 +62,21 @@ function Navheader() {
         setChild(jsonbody);
       })
       .catch((error) => {
-        console.error('Error fetching messages for student:', error);
+        console.error("Error fetching messages for student:", error);
       });
   };
   useEffect(() => {
     getChild();
   }, []);
   return (
-    <nav className={`navigation scroll-bar ${navClass}`} style={{ zIndex: 999 }}>
+    <nav
+      className={`navigation scroll-bar ${navClass}`}
+      style={{ zIndex: 999 }}
+    >
       <div className="container pl-0 pr-0">
         <div className="nav-content">
           <div className="nav-top">
-            <Link to="/" className='justify-content-center pl-0'>
+            <Link to="/" className="justify-content-center pl-0">
               {/* <i className="feather-slack text-success display1-size mr-3 ml-3"></i>
               <span className="d-inline-block fredoka-font ls-3 fw-600 text-current font-xl logo-text mb-0">
                 Elomoas.
@@ -71,7 +84,8 @@ function Navheader() {
               <img
                 src="/assets/images/abc_logo.png"
                 alt="logo"
-                className="" width={60}
+                className=""
+                width={60}
               />
             </Link>
             <span
@@ -92,36 +106,43 @@ function Navheader() {
                 <span>Home</span>
               </NavLink>
             </li>
-            {
-              child ? child.map((c,index) => (
-                <li className="has-droupdown nav-item" key={index}>
-                  <Link to="#" className="navi-link">
-                    <i className="feather-user mr-2 droupdown-toggle"></i>
-                    <span>{c.name}</span>
-                  </Link>
-                  <ul className="submenu">
-                    <li className="nav-item">
-                      <NavLink className="navi-link" to={"/parent_subjects/"+c.id}>
-                        Subjetcs
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="navi-link" to={"/parent_assessments/"+c.id}>
-                        Assessments
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="navi-link" to={"/parent_tests/"+c.id}>
-                        Tests
-                      </NavLink>
-                    </li>
-                  </ul>
-                </li>
-              ))
-                :
-                ""
-            }
-           
+            {child
+              ? child.map((c, index) => (
+                  <li className="has-droupdown nav-item" key={index}>
+                    <Link to="#" className="navi-link">
+                      <i className="feather-user mr-2 droupdown-toggle"></i>
+                      <span>{c.name}</span>
+                    </Link>
+                    <ul className="submenu">
+                      <li className="nav-item">
+                        <NavLink
+                          className="navi-link"
+                          to={"/parent_subjects/" + c.id}
+                        >
+                          Subjetcs
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink
+                          className="navi-link"
+                          to={"/parent_assessments/" + c.id}
+                        >
+                          Assessments
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink
+                          className="navi-link"
+                          to={"/parent_tests/" + c.id}
+                        >
+                          Tests
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                ))
+              : ""}
+
             {/* <li className="nav-item">
               <NavLink className="navi-link" to="student">
                 <i className="feather-book-open mr-2"></i>
@@ -152,7 +173,6 @@ function Navheader() {
             </li>
             <li>
               <Link
-
                 onClick={logout}
                 className="nav-content-bttn open-font h-auto pt-2 pb-2"
               >
@@ -166,6 +186,5 @@ function Navheader() {
     </nav>
   );
 }
-
 
 export default Navheader;

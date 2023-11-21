@@ -25,10 +25,10 @@ function Students() {
       const table = $(tableRef.current).DataTable();
       table.destroy();
     };
-  }, []);
+  },[]);
 
   const getStudents = () => {
-    fetch(baseUrl + "api/api_all_students")
+    fetch(baseUrl + "api/school/api_all_students")
       .then((result) => result.json())
       .then((jsonbody) => {
         console.warn(jsonbody);
@@ -58,7 +58,7 @@ function Students() {
                   </div>
                   <div className="float-right">
                     <Link
-                      to="/sub_admin/add_student_view"
+                      to="/school/add_student_view"
                       className="p-2 d-inline-block text-white fw-700 lh-30 rounded-lg text-center font-xsssss ls-3 bg-current"
                     >
                       Add student
@@ -85,16 +85,16 @@ function Students() {
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{student.name}</td>
-                          <td>{student.school.school_name}</td>
-                          <td>{student.class.class}</td>
+                          <td>{student.school?.school_name}</td>
+                          <td>{student.class?.class}</td>
                           <td>{student.section_id === 1 ? "A" : "B"}</td>
                           <td className="text-dark">
-                            <a
-                              href="/sub_admin/view_student"
+                            <Link
+                              to="/school/view_student"
                               className="p-2 d-inline-block text-white fw-700 lh-30 rounded-lg text-center font-xsssss ls-3 bg-current"
                             >
                               View
-                            </a>
+                            </Link>
                           </td>
                         </tr>
                       ))}
